@@ -22,7 +22,6 @@ void setup() {
   Serial.begin (9600);
   radio.begin();
   radio.setPALevel(RF24_PA_MIN);
-  //radio.setDataRate(RF24_250KBPS);
   radio.openWritingPipe(address);
 }
 
@@ -38,13 +37,6 @@ void loop() {
   itoa(X_axis, Xaxis, 10); //turns the integer values into arrays
   delay(2);
   itoa(Y_axis, Yaxis, 10);
-  
-  /*Serial.print ("X axis =");
-  Serial.println (Xaxis);
-  
-  Serial.print ("Y axis =");
-  Serial.println (Yaxis);*/
-  
 
   //Bellow puts the values into one array called transmitChars
   strcat(transmitChars,startMarker);
@@ -52,9 +44,7 @@ void loop() {
   strcat(transmitChars,comma);
   strcat(transmitChars,Yaxis);
   strcat(transmitChars,endMarker);
-  /*Serial.println(transmitChars);
-  Serial.flush();*/
-  //Serial.print ("Sendig");
+
   radio.write(&transmitChars, sizeof(transmitChars)); //Sends the array
   delay(2000);
   

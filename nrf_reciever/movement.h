@@ -14,7 +14,7 @@ const int clockPin = 4;
 ////Pin connected to DS of 74HC595 Pin 14
 const int dataPin = 5;
 
-//Used for double H-Bridge
+//Used for double H-Bridge being controller by a serial to parallel chip
 const byte direct[5] = {
   B00001010,  //Default/Stay
   B00001010,  //Forward

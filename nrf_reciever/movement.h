@@ -1,12 +1,6 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#define STAY  0
-#define FORWARD 1
-#define BACKWARD 2
-#define RIGHT 3
-#define LEFT 4
-
 //Pin connected to ST_CP of 74HC595 Pin 12
 const int latchPin = 2;
 //Pin connected to SH_CP of 74HC595 Pin 11
@@ -26,30 +20,21 @@ void movement ();
 void parseData();
 
 class Movement{
+private:
+  constexpr STAY  0;
+  constexpr FORWARD 1;
+  constexpr BACKWARD 2;
+  constexpr RIGHT 3;
+  constexpr LEFT 4;
+
+  
 public:
-    void Dependencies(int latchPin, int clockPin, int dataPin);
-    virtual void Go();
+  void Dependencies(int latchPin, int clockPin, int dataPin);
+  void stay();
+  void forward();
+  void backward();
+  void right();
+  void left();
 };
-
-class Forward: public Movement {
-public:
-    void Go();
-};
-
-class Backward: public Movement {
-public:    
-    void Go();
-};
-
-class Right: public Movement {
-public:
-    void Go();
-};
-
-class Left: public Movement {
-public:
-    void Go();
-};
-
 
 #endif

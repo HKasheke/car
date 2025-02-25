@@ -2,13 +2,13 @@
 #include <RF24.h>
 #include "movement.h"
 
-void Movement::Dependencies(int latchPin, int clockPin, int dataPin){
+void Movement::dependencies(int latchPin, int clockPin, int dataPin){
   pinMode(latchPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
 }
   
-void Movement::Go() {
+void Movement() {
     //ground latchPin and hold low for as long as you are transmitting
     digitalWrite(latchPin, 0);
     shiftOut(dataPin, clockPin, LSBFIRST, direct[STAY]);
@@ -17,7 +17,7 @@ void Movement::Go() {
     digitalWrite(latchPin, 1);
 }
 
-void Forward::Go() {
+void Movement::forward() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[FORWARD]);
@@ -26,7 +26,7 @@ void Forward::Go() {
   digitalWrite(latchPin, 1);
 }
 
-void Backward::Go(){
+void Movement::backward(){
   //Shift Register code two change the Hbridge for dynamic movement
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
@@ -36,7 +36,7 @@ void Backward::Go(){
   digitalWrite(latchPin, 1);
 }
 
-void Right::Go() {
+void Movement::right() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[RIGHT]);
@@ -45,7 +45,7 @@ void Right::Go() {
   digitalWrite(latchPin, 1);
 }
 
-void Left::Go() {
+void Movement::left() {
     //Shift Register code two change the Hbridge for dynamic movement
     //ground latchPin and hold low for as long as you are transmitting
     digitalWrite(latchPin, 0);

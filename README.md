@@ -1,3 +1,6 @@
+Software
+  RF24 library required
+
 Electronics used 
 
 Receiver:

@@ -16,10 +16,7 @@ const byte direct[5] = {
   B00100110,  //Left
   B00001001}; //Right
 
-void movement ();
-void parseData();
-
-class Car{
+class Movement{
 private:
   const unsigned short int _STAY = 0;
   const unsigned short int _FORWARD = 1;
@@ -30,11 +27,7 @@ private:
 public:
   void dependencies(int latchPin, int clockPin, int dataPin);
   void movement();
-  void stay();
-  void forward();
-  void backward();
-  void left();
-  void right();
+  void parseData();
 
 };
 

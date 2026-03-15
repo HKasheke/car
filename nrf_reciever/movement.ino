@@ -8,19 +8,28 @@ void Movement::dependencies(int latchPin, int clockPin, int dataPin){
   pinMode(dataPin, OUTPUT);
 }
   
-void Movement() {
-    //ground latchPin and hold low for as long as you are transmitting
-    digitalWrite(latchPin, 0);
-    shiftOut(dataPin, clockPin, LSBFIRST, direct[STAY]);
-    //return the latch pin high to signal chip that it
-    //no longer needs to listen for information
-    digitalWrite(latchPin, 1);
+Movement::Movement() {
+  //ground latchPin and hold low for as long as you are transmitting
+  digitalWrite(latchPin, 0);
+  shiftOut(dataPin, clockPin, LSBFIRST, direct[_STAY]);
+  //return the latch pin high to signal chip that it
+  //no longer needs to listen for information
+  digitalWrite(latchPin, 1);
+}
+
+void Movement::stay() {
+  //ground latchPin and hold low for as long as you are transmitting
+  digitalWrite(latchPin, 0);
+  shiftOut(dataPin, clockPin, LSBFIRST, direct[_STAY]);
+  //return the latch pin high to signal chip that it
+  //no longer needs to listen for information
+  digitalWrite(latchPin, 1);
 }
 
 void Movement::forward() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
-  shiftOut(dataPin, clockPin, LSBFIRST, direct[FORWARD]);
+  shiftOut(dataPin, clockPin, LSBFIRST, direct[_FORWARD]);
   //return the latch pin high to signal chip that it
   //no longer needs to listen for information
   digitalWrite(latchPin, 1);
@@ -30,7 +39,7 @@ void Movement::backward(){
   //Shift Register code two change the Hbridge for dynamic movement
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
-  shiftOut(dataPin, clockPin, LSBFIRST, direct[LEFT]);
+  shiftOut(dataPin, clockPin, LSBFIRST, direct[_BACKWARD]);
   //return the latch pin high to signal chip that it
   //no longer needs to listen for information
   digitalWrite(latchPin, 1);
@@ -39,7 +48,7 @@ void Movement::backward(){
 void Movement::right() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
-  shiftOut(dataPin, clockPin, LSBFIRST, direct[RIGHT]);
+  shiftOut(dataPin, clockPin, LSBFIRST, direct[_RIGHT]);
   //return the latch pin high to signal chip that it
   //no longer needs to listen for information
   digitalWrite(latchPin, 1);
@@ -49,102 +58,102 @@ void Movement::left() {
     //Shift Register code two change the Hbridge for dynamic movement
     //ground latchPin and hold low for as long as you are transmitting
     digitalWrite(latchPin, 0);
-    shiftOut(dataPin, clockPin, LSBFIRST, direct[LEFT]);
+    shiftOut(dataPin, clockPin, LSBFIRST, direct[_LEFT]);
     //return the latch pin high to signal chip that it
     //no longer needs to listen for information
     digitalWrite(latchPin, 1);
 }
 
-void movement ()
+void Movement::movement ()
 {
 
-  if (Y_axis > 121){
-    dirction = FORWARD;
-    forward.Go();  
+  if (y_axis > 121){
+    dirction = _FORWARD;
+    forward();  
     } 
-    else if (Y_axis < 121){
-        dirction = BACKWARD;
-      backward.Go();    
-    }else if ((Y_axis == 121)&&(X_axis == 125)){
-        dirction = STAY;
-        stay.Go();
+    else if (y_axis < 121){
+        dirction = _BACKWARD;
+      backward();    
+    }else if ((y_axis == 121)&&(x_axis == 125)){
+        dirction = _STAY;
+        stay();
         }
 
-  if (X_axis < 125)
+  if (x_axis < 125)
   {
-    dirction = RIGHT;
-    right.Go();
+    dirction = _RIGHT;
+    right();
   } 
-    else if (X_axis > 125)
+    else if (x_axis > 125)
     {
-      dirction = LEFT;
-      left.Go();
-    }else if((Y_axis == 121)&&(X_axis == 125)){
-        dirction = STAY;
-        stay.Go();
+      dirction = _LEFT;
+      left();
+    }else if((y_axis == 121)&&(x_axis == 125)){
+        dirction = _STAY;
+        stay();
         }
         
   switch (dirction)
   {
-    case STAY:
+    case _STAY:
 
         analogWrite (right_wheels, 0);
         analogWrite(left_wheels, 0);      
         
         break;
         
-    case FORWARD:
+    case _FORWARD:
 
-        while (Y_axis > 121)
+        while (y_axis > 121)
         {
           
-          R_speed = map(Y_axis, 121, 255, 0, 255);
-          L_speed = R_speed;
+          right_speed = map(y_axis, 121, 255, 0, 255);
+          left_speed = right_speed;
           
-          analogWrite (right_wheels, R_speed);
-          analogWrite(left_wheels, L_speed);
+          analogWrite (right_wheels, right_speed);
+          analogWrite(left_wheels, left_speed);
 
           parseData();
         }
         break;
         
-    case BACKWARD:
+    case _BACKWARD:
 
-        while (Y_axis < 121)
+        while (y_axis < 121)
         {
-          R_speed = map(Y_axis, 121, 0, 0, 255);
-          L_speed = R_speed;
+          right_speed = map(y_axis, 121, 0, 0, 255);
+          left_speed = right_speed;
           
-          analogWrite (right_wheels, R_speed);
-          analogWrite(left_wheels, L_speed); 
+          analogWrite (right_wheels, right_speed);
+          analogWrite(left_wheels, left_speed); 
 
           parseData();
         }
         break;
 
-    case RIGHT:
+    case _RIGHT:
 
-        while (X_axis < 125)
+        while (x_axis < 125)
         {
-          R_speed = map(X_axis, 125, 0, 0, 255);
-          L_speed = R_speed;
+          right_speed = map(x_axis, 125, 0, 0, 255);
+          left_speed = right_speed;
           
-          analogWrite (right_wheels, R_speed);
-          analogWrite(left_wheels, L_speed);
+          analogWrite (right_wheels, right_speed);
+          analogWrite(left_wheels, left_speed);
 
           parseData();
         }
         break;
 
-    case LEFT:
+    case _LEFT:
 
-        while (X_axis > 125)
+        while (x_axis > 125)
         {
-          R_speed = map(X_axis, 125, 255, 0, 255);
-          L_speed = R_speed;
+          right_speed = map(x_axis, 125, 255, 0, 255);
+          left_speed = right_speed;
           
-          analogWrite (right_wheels, R_speed);
-          analogWrite(left_wheels, L_speed);
+          analogWrite (right_wheels, right_speed);
+          analogWrite(left_wheels, left_speed);
           
           parseData();          
         }
@@ -166,10 +175,10 @@ if (radio.available())
     char * strtokIndx; // this is used by strtok() as an index
 
     strtokIndx = strtok(tempChars,"<,");      // get the first part - the string between '<' and ','
-    X_axis = atoi(strtokIndx); // convert this part to an integer puts in X_axis
+    x_axis = atoi(strtokIndx); // convert this part to an integer puts in x_axis
 
     strtokIndx = strtok(NULL, ",>"); // this continues where the previous call left off from ',' to '>'
-    Y_axis = atoi(strtokIndx);     // convert this part to an integer puts in Y_axis
+    y_axis = atoi(strtokIndx);     // convert this part to an integer puts in y_axis
     
     }
   }

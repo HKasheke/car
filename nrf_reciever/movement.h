@@ -21,20 +21,22 @@ void parseData();
 
 class Movement{
 private:
-  constexpr STAY  0;
-  constexpr FORWARD 1;
-  constexpr BACKWARD 2;
-  constexpr RIGHT 3;
-  constexpr LEFT 4;
+  const unsigned short int _STAY = 0;
+  const unsigned short int _FORWARD = 1;
+  const unsigned short int _BACKWARD = 2;
+  const unsigned short int _RIGHT = 3;
+  const unsigned short int _LEFT = 4;
 
-  
-public:
-  void Dependencies(int latchPin, int clockPin, int dataPin);
-  void stay();
   void forward();
   void backward();
   void right();
   void left();
+  
+public:
+  void dependencies(int latchPin, int clockPin, int dataPin);
+  void movement();
+  void stay();
+
 };
 
 #endif

@@ -26,16 +26,15 @@ private:
   const unsigned short int _BACKWARD = 2;
   const unsigned short int _RIGHT = 3;
   const unsigned short int _LEFT = 4;
-
-  void forward();
-  void backward();
-  void right();
-  void left();
   
 public:
   void dependencies(int latchPin, int clockPin, int dataPin);
   void movement();
   void stay();
+  void forward();
+  void backward();
+  void left();
+  void right();
 
 };
 

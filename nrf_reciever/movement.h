@@ -19,7 +19,7 @@ const byte direct[5] = {
 void movement ();
 void parseData();
 
-class Movement{
+class Car{
 private:
   const unsigned short int _STAY = 0;
   const unsigned short int _FORWARD = 1;

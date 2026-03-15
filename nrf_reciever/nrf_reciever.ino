@@ -19,7 +19,7 @@ int right_speed = 0;
 char tempChars[MaxDataChars];
 
 //classs--Object
-Movement move;
+Car car;
 
 void setup() {
   Serial.begin (9600);

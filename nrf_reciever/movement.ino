@@ -2,13 +2,13 @@
 #include <RF24.h>
 #include "movement.h"
 
-void Movement::dependencies(int latchPin, int clockPin, int dataPin){
+void Car::dependencies(int latchPin, int clockPin, int dataPin){
   pinMode(latchPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
 }
   
-Movement::Movement() {
+Car::Car() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[_STAY]);
@@ -17,7 +17,7 @@ Movement::Movement() {
   digitalWrite(latchPin, 1);
 }
 
-void Movement::stay() {
+void Car::stay() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[_STAY]);
@@ -26,7 +26,7 @@ void Movement::stay() {
   digitalWrite(latchPin, 1);
 }
 
-void Movement::forward() {
+void Car::forward() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[_FORWARD]);
@@ -35,7 +35,7 @@ void Movement::forward() {
   digitalWrite(latchPin, 1);
 }
 
-void Movement::backward(){
+void Car::backward(){
   //Shift Register code two change the Hbridge for dynamic movement
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
@@ -45,7 +45,7 @@ void Movement::backward(){
   digitalWrite(latchPin, 1);
 }
 
-void Movement::right() {
+void Car::right() {
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[_RIGHT]);
@@ -54,7 +54,7 @@ void Movement::right() {
   digitalWrite(latchPin, 1);
 }
 
-void Movement::left() {
+void Car::left() {
     //Shift Register code two change the Hbridge for dynamic movement
     //ground latchPin and hold low for as long as you are transmitting
     digitalWrite(latchPin, 0);
@@ -64,7 +64,7 @@ void Movement::left() {
     digitalWrite(latchPin, 1);
 }
 
-void Movement::movement ()
+void Car::movement ()
 {
 
   if (y_axis > 121){

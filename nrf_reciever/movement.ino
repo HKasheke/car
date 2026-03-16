@@ -8,8 +8,15 @@ void Movement::dependencies(int latchPin, int clockPin, int dataPin){
   pinMode(dataPin, OUTPUT);
 }
 
-void Movement::movement ()
+Movement::movement(){
+  Car car;
+  car.stay();
+}
+
+void Movement::run ()
 {
+
+  parseData();
 
   if (y_axis > 121){
     dirction = _FORWARD;
@@ -57,7 +64,6 @@ void Movement::movement ()
           analogWrite (right_wheels, right_speed);
           analogWrite(left_wheels, left_speed);
 
-          parseData();
         }
         break;
         
@@ -70,8 +76,6 @@ void Movement::movement ()
           
           analogWrite (right_wheels, right_speed);
           analogWrite(left_wheels, left_speed); 
-
-          parseData();
         }
         break;
 
@@ -85,7 +89,6 @@ void Movement::movement ()
           analogWrite (right_wheels, right_speed);
           analogWrite(left_wheels, left_speed);
 
-          parseData();
         }
         break;
 
@@ -98,8 +101,6 @@ void Movement::movement ()
           
           analogWrite (right_wheels, right_speed);
           analogWrite(left_wheels, left_speed);
-          
-          parseData();          
         }
         break;
   }  

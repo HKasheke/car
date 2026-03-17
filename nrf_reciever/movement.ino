@@ -2,12 +2,6 @@
 #include <RF24.h>
 #include "movement.h"
 
-void Movement::dependencies(int latchPin, int clockPin, int dataPin){
-  pinMode(latchPin, OUTPUT);
-  pinMode(clockPin, OUTPUT);
-  pinMode(dataPin, OUTPUT);
-}
-
 Movement::movement(){
   Car car;
   car.stay();

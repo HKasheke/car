@@ -9,6 +9,10 @@ enum direction {
  };
 
 Car::Car() {
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+
   //ground latchPin and hold low for as long as you are transmitting
   digitalWrite(latchPin, 0);
   shiftOut(dataPin, clockPin, LSBFIRST, direct[_STAY]);

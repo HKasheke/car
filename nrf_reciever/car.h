@@ -24,7 +24,6 @@ public:
   void backward();
   void left();
   void right();
-
 };
 
 #endif
